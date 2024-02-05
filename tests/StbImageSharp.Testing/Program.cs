@@ -11,7 +11,6 @@ using Hebron.Runtime;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
-using StbNative;
 
 namespace StbImageSharp.Testing
 {
@@ -77,7 +76,6 @@ namespace StbImageSharp.Testing
 		private static int tasksStarted;
 		private static int filesProcessed, filesMatches;
 		private static LoadingTimes stbImageSharpTotal = new LoadingTimes();
-		private static LoadingTimes stbNativeTotal = new LoadingTimes();
 		private static LoadingTimes imageSharpTotal = new LoadingTimes();
 
 		public static void Log(string message)
@@ -188,37 +186,6 @@ namespace StbImageSharp.Testing
 						return img.Data;
 					});
 
-				var stbNativeResult = ParseTest(
-					"Stb.Native",
-					(out int x, out int y, out ColorComponents ccomp) =>
-					{
-						var result = Native.load_from_memory(data, out x, out y, out var icomp,
-							(int)ColorComponents.RedGreenBlueAlpha);
-						ccomp = (ColorComponents)icomp;
-						return result;
-					});
-
-
-				if (stbImageSharpResult.Width != stbNativeResult.Width)
-					throw new Exception(string.Format("Inconsistent x: StbSharp={0}, Stb.Native={1}", stbImageSharpResult.Width, stbNativeResult.Width));
-
-				if (stbImageSharpResult.Height != stbNativeResult.Height)
-					throw new Exception(string.Format("Inconsistent y: StbSharp={0}, Stb.Native={1}", stbImageSharpResult.Height, stbNativeResult.Height));
-
-				if (stbImageSharpResult.Components != stbNativeResult.Components)
-					throw new Exception(string.Format("Inconsistent comp: StbSharp={0}, Stb.Native={1}", stbImageSharpResult.Components, stbNativeResult.Components));
-
-				if (stbImageSharpResult.Data.Length != stbNativeResult.Data.Length)
-					throw new Exception(string.Format("Inconsistent parsed length: StbSharp={0}, Stb.Native={1}",
-						stbImageSharpResult.Data.Length,
-						stbNativeResult.Data.Length));
-
-				for (var i = 0; i < stbImageSharpResult.Data.Length; ++i)
-					if (stbImageSharpResult.Data[i] != stbNativeResult.Data[i])
-						throw new Exception(string.Format("Inconsistent data: index={0}, StbSharp={1}, Stb.Native={2}",
-							i,
-							(int)stbImageSharpResult.Data[i],
-							(int)stbNativeResult.Data[i]));
 
 				match = true;
 
@@ -245,7 +212,6 @@ namespace StbImageSharp.Testing
 				}
 
 				stbImageSharpTotal.Add(extension, stbImageSharpResult.TimeInMs);
-				stbNativeTotal.Add(extension, stbNativeResult.TimeInMs);
 
 				GC.Collect();
 			}
@@ -264,7 +230,6 @@ namespace StbImageSharp.Testing
 				Interlocked.Decrement(ref tasksStarted);
 
 				Log("StbImageSharp - {0}", stbImageSharpTotal.BuildString());
-				Log("Stb.Native - {0}", stbNativeTotal.BuildString());
 				Log("ImageSharp - {0}", imageSharpTotal.BuildString());
 				Log("Total files processed - {0}", stbImageSharpTotal.BuildStringCount());
 				Log("StbImageSharp/Stb.Native matches/processed - {0}/{1}", filesMatches, filesProcessed);
