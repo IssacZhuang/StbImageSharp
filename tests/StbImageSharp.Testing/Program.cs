@@ -278,15 +278,24 @@ namespace StbImageSharp.Testing
 		{
 			try
 			{
+				string path = "";
 				if (args == null || args.Length < 1)
 				{
-					Console.WriteLine("Usage: StbImageSharp.Testing <path_to_folder_with_images>");
-					return 1;
-				}
+					Console.WriteLine("Usage: StbImageSharp.Testing <path_to_folder_with_images>, no path found, use default path 'TestImages'");
+					path = "TestImages";
+					if (!Directory.Exists(path))
+					{
+						Directory.CreateDirectory(path);
+					}
+                }
+				else
+				{
+					path = args[0];
+                }
 
 				var start = DateTime.Now;
 
-				var res = RunTests(args[0]);
+				var res = RunTests(path);
 				var passed = DateTime.Now - start;
 				Log("Span: {0} ms", passed.TotalMilliseconds);
 				Log(DateTime.Now.ToLongTimeString() + " -- " + (res ? "Success" : "Failure"));
