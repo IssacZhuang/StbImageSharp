@@ -1,6 +1,7 @@
 ﻿using Hebron.Runtime;
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace StbImageSharp
@@ -42,6 +43,7 @@ namespace StbImageSharp
 			return 0;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static byte stbi__get8(stbi__context s)
 		{
 			var b = s.Stream.ReadByte();

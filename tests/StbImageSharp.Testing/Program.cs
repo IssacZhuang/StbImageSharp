@@ -112,7 +112,7 @@ namespace StbImageSharp.Testing
 			for (var i = 0; i < LoadTries; ++i)
 				parsed = load(out x, out y, out comp);
 
-			Log("x: {0}, y: {1}, comp: {2}, size: {3}", x, y, comp, parsed.Length);
+			//Log("x: {0}, y: {1}, comp: {2}, size: {3}", x, y, comp, parsed.Length);
 			var passed = EndWatch(sw) / LoadTries;
 			Log("Span: {0} ms", passed);
 

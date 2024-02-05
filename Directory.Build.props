@@ -1,0 +1,23 @@
+<Project>
+<PropertyGroup>
+  <!-- Only  win-x64, linux-x64, osx-x64 -->
+  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+</PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <Deterministic>true</Deterministic>
+    <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
+  </PropertyGroup>
+
+
+</Project>
