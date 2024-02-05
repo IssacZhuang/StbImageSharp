@@ -3,6 +3,8 @@
 using System.Runtime.InteropServices;
 using Hebron.Runtime;
 
+#pragma warning disable CA2014
+
 namespace StbImageSharp
 {
 	unsafe partial class StbImage

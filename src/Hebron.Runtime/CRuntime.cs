@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+
+
 namespace Hebron.Runtime
 {
 	internal static unsafe class CRuntime
@@ -16,7 +18,9 @@ namespace Hebron.Runtime
 		{
 			var ptr = Marshal.AllocHGlobal((int)size);
 
+#if CHECK_ALLOC
 			MemoryStats.Allocated();
+#endif
 
 			return ptr.ToPointer();
 		}
@@ -28,7 +32,9 @@ namespace Hebron.Runtime
 
 			var ptr = new IntPtr(a);
 			Marshal.FreeHGlobal(ptr);
+#if CHECK_ALLOC
 			MemoryStats.Freed();
+#endif
 		}
 
 		public static void memcpy(void* a, void* b, long size)
