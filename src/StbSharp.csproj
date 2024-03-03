@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <OutputType>Library</OutputType>
         <Authors>StbImageSharpTeam</Authors>
-        <Product>StbImageSharp</Product>
-        <PackageId>StbImageSharp</PackageId>
+        <Product>StbSharp</Product>
+        <PackageId>StbSharp</PackageId>
 		<TargetFramework>net8.0</TargetFramework>
         <Description>C# port of the stb_image.h</Description>
         <PackageLicenseUrl>Public Domain</PackageLicenseUrl>
@@ -16,4 +17,9 @@
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
         <!--GeneratePackageOnBuild>true</GeneratePackageOnBuild-->
     </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo  Include="StbImageSharp.Tests" />
+        <InternalsVisibleTo  Include="StbTrueTypeSharp.Tests" />
+    </ItemGroup>
 </Project>

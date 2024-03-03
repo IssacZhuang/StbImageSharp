@@ -13,7 +13,7 @@ namespace StbImageSharp
 #endif
 	static unsafe partial class StbImage
 	{
-		public static string stbi__g_failure_reason;
+		public static string stbi__g_failure_reason = "";
 		public static readonly char[] stbi__parse_png_file_invalid_chunk = new char[25];
 
 		public static int NativeAllocations => MemoryStats.Allocations;
@@ -32,6 +32,7 @@ namespace StbImageSharp
 					throw new ArgumentNullException("stream");
 
 				Stream = stream;
+				_tempBuffer = Array.Empty<byte>();
 			}
 
 			public Stream Stream { get; }

@@ -138,6 +138,46 @@ namespace Hebron.Runtime
 			return realloc(a, (long)newSize);
 		}
 
+		public static float fabs(double a)
+		{
+			return (float)Math.Abs(a);
+		}
+
+		public static float fabs(float a)
+		{
+			return MathF.Abs(a);
+		}
+
+		public static float floor(float a)
+		{
+			return MathF.Floor(a);
+		}
+
+		public static float ceil(float a)
+		{
+			return MathF.Ceiling(a);
+		}
+
+		public static float sqrt(float val)
+		{
+			return MathF.Sqrt(val);
+		}
+
+		public static float cos(float value)
+		{
+			return MathF.Cos(value);
+		}
+
+		public static float acos(float value)
+		{
+			return MathF.Acos(value);
+		}
+
+		public static float sin(float value)
+		{
+			return MathF.Sin(value);
+		}
+
 		public static int abs(int v)
 		{
 			return Math.Abs(v);
@@ -220,6 +260,21 @@ namespace Hebron.Runtime
 			}
 
 			return result;
+		}
+
+		public static double fmod(double x, double y)
+		{
+			return x % y;
+		}
+
+		public static ulong strlen(sbyte* str)
+		{
+			var ptr = str;
+
+			while (*ptr != '\0')
+				ptr++;
+
+			return (ulong)ptr - (ulong)str - 1;
 		}
 	}
 }
