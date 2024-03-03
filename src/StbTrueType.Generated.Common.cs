@@ -144,7 +144,7 @@ namespace StbTrueTypeSharp
 			var ray = stackalloc float[] { 1, 0 };
 			float y_frac = 0;
 			var winding = 0;
-			y_frac = (float)CRuntime.fmod(y, 1.0f);
+			y_frac = CRuntime.fmod(y, 1.0f);
 			if (y_frac < 0.01f)
 				y += 0.01f;
 			else if (y_frac > 0.99f)
@@ -223,8 +223,8 @@ namespace StbTrueTypeSharp
 		public static float stbtt__cuberoot(float x)
 		{
 			if (x < 0)
-				return -(float)CRuntime.pow(-x, 1.0f / 3.0f);
-			return (float)CRuntime.pow(x, 1.0f / 3.0f);
+				return -CRuntime.pow(-x, 1.0f / 3.0f);
+			return CRuntime.pow(x, 1.0f / 3.0f);
 		}
 
 		public static void stbtt__h_prefilter(byte* pixels, int w, int h, int stride_in_bytes, uint kernel_width)

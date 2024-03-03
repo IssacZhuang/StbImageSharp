@@ -183,9 +183,9 @@ namespace Hebron.Runtime
 			return Math.Abs(v);
 		}
 
-		public static double pow(double a, double b)
+		public static float pow(float a, float b)
 		{
-			return Math.Pow(a, b);
+			return MathF.Pow(a, b);
 		}
 
 		public static void SetArray<T>(T[] data, T value)
@@ -194,9 +194,9 @@ namespace Hebron.Runtime
 				data[i] = value;
 		}
 
-		public static double ldexp(double number, int exponent)
+		public static float ldexp(float number, int exponent)
 		{
-			return number * Math.Pow(2, exponent);
+			return number * MathF.Pow(2, exponent);
 		}
 
 		public static int strcmp(sbyte* src, string token)
@@ -262,7 +262,7 @@ namespace Hebron.Runtime
 			return result;
 		}
 
-		public static double fmod(double x, double y)
+		public static float fmod(float x, float y)
 		{
 			return x % y;
 		}
