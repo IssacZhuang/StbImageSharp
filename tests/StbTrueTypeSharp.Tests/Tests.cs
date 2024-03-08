@@ -23,7 +23,7 @@ namespace StbTrueTypeSharp.Tests
 			var ttfData = File.ReadAllBytes(@"C:\Windows\Fonts\webdings.ttf");
 			Assert.Throws<Exception>(() =>
 			{
-				var fontInfo = CreateFont(ttfData, 0);
+				TryCreateFont(ttfData, 0, out var fontInfo);
 			});
 		}
 
@@ -31,7 +31,7 @@ namespace StbTrueTypeSharp.Tests
 		public void TestCreationAndDispose()
 		{
 			var ttfData = _assembly.ReadResourceAsBytes("DroidSans.ttf");
-			var fontInfo = CreateFont(ttfData, 0);
+			TryCreateFont(ttfData, 0, out var fontInfo);
 			Assert.NotNull(fontInfo);
 			Assert.IsTrue(fontInfo.isDataCopy);
 			fontInfo.Dispose();
@@ -67,7 +67,8 @@ namespace StbTrueTypeSharp.Tests
 				for (int i = 0; i < numberOfFonts; i++)
 				{
 					int offset = stbtt_GetFontOffsetForIndex(ttcPtr, i);
-					fonts.Add(CreateFont(ttcContent, offset));
+					TryCreateFont(ttcContent, offset, out var fontInfo);
+					fonts.Add(fontInfo);
 				}
 			}
 
@@ -124,7 +125,8 @@ namespace StbTrueTypeSharp.Tests
 		public void TestNewRasterizer()
 		{
 			var ttfData = _assembly.ReadResourceAsBytes("DroidSans.ttf");
-			var fontInfo = CreateFont(ttfData, 0);
+			//var fontInfo = CreateFont(ttfData, 0);
+			TryCreateFont(ttfData, 0, out var fontInfo);
 			Assert.NotNull(fontInfo);
 			Assert.IsTrue(fontInfo.isDataCopy);
 
@@ -140,7 +142,8 @@ namespace StbTrueTypeSharp.Tests
 		public void TestOldRasterizer()
 		{
 			var ttfData = _assembly.ReadResourceAsBytes("DroidSans.ttf");
-			var fontInfo = CreateFont(ttfData, 0);
+			//var fontInfo = CreateFont(ttfData, 0);
+			TryCreateFont(ttfData, 0, out var fontInfo);
 			Assert.NotNull(fontInfo);
 			Assert.IsTrue(fontInfo.isDataCopy);
 

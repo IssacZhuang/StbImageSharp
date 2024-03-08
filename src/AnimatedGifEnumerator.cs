@@ -48,15 +48,23 @@ namespace StbImageSharp
 
 			if (Current == null)
 			{
-				Current = new AnimatedFrameResult
-				{
-					Width = _gif.w,
-					Height = _gif.h,
-					SourceComp = (ColorComponents)ccomp,
-					Comp = ColorComponents == ColorComponents.Default ? (ColorComponents)ccomp : ColorComponents
-				};
+				// Current = new AnimatedFrameResult
+				// {
+				// 	Width = _gif.w,
+				// 	Height = _gif.h,
+				// 	SourceComp = (ColorComponents)ccomp,
+				// 	Comp = ColorComponents == ColorComponents.Default ? (ColorComponents)ccomp : ColorComponents
+				// };
 
-				Current.Data = new byte[Current.Width * Current.Height * (int)Current.Comp];
+				// Current.Data = new byte[Current.Width * Current.Height * (int)Current.Comp];
+				ColorComponents comp = ColorComponents == ColorComponents.Default ? (ColorComponents)ccomp : ColorComponents;
+				Current = new AnimatedFrameResult(
+					new byte[_gif.w * _gif.h * (int)comp],
+					_gif.w,
+					_gif.h,
+					comp,
+					(ColorComponents)ccomp
+					);
 			}
 
 			Current.DelayInMs = _gif.delay;
